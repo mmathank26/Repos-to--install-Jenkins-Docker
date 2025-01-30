@@ -1,0 +1,48 @@
+To troubleshoot the accessibility issue for your Azure VM on port 8080, you can follow these steps:
+(Cosidering 40.119.54.7 as public IP of VM )
+
+Step 1: Verify Network Security Group (NSG) Rules
+Ensure that your NSG allows inbound traffic on port 8080.
+
+Go to the Azure portal.
+Navigate to your VM's Networking settings.
+Check the inbound security rules and ensure there's a rule allowing traffic on port 8080.
+
+
+Step 2: Check VM Firewall Settings
+Ensure that the firewall on your VM is not blocking port 8080.
+
+sudo firewall-cmd --list-all
+If necessary, add a rule to allow traffic on port 8080.
+
+sudo firewall-cmd --permanent --add-port=8080/tcp
+sudo firewall-cmd --reload
+
+
+Step 3: Verify Application Listening on Port 8080
+Ensure that your application is correctly configured to listen on port 8080.
+
+sudo netstat -tuln | grep 8080
+
+
+Step 4: Test Connectivity
+From another machine, test the connectivity to your VM on port 8080.
+
+telnet 40.119.54.7 8080
+Or use curl to check if the service is responding.
+
+curl http://40.119.54.7:8080
+
+
+Step 5: Use Azure Network Watcher
+Use Azure Network Watcher to diagnose and troubleshoot network issues.
+
+Go to the Azure portal.
+Navigate to Network Watcher.
+Use the "Connection troubleshoot" feature to test connectivity to your VM on port 8080.
+
+
+Step 6: Review Logs
+Check the logs for any errors or warnings that might indicate why the port is not accessible.
+
+sudo journalctl -u jenkins.service
