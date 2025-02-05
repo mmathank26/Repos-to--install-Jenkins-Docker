@@ -52,6 +52,16 @@ echo "
 sudo systemctl enable jenkins
 sudo systemctl start jenkins 
 
+sudo systemctl status jenkins
+
+echo "
+      #################################
+      #################################
+You can now access Jenkins on port 8080 of the VM
+      #################################
+      #################################
+"
+
 echo "
       ########################################
       ########################################
