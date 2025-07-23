@@ -5,14 +5,15 @@ echo <<EOF
 ##############################################################"
 EOF
 
-sudo tee /etc/yum.repos.d/epel.repo > /dev/null <
-[epel]
-name=Extra Packages for Enterprise Linux 8
-baseurl=https://download.fedoraproject.org/pub/epel/8/Everything/\$basearch
+sudo tee /etc/yum.repos.d/kubernetes.repo <<EOF
+[kubernetes]
+name=Kubernetes
+baseurl=https://pkgs.k8s.io/core:/stable:/v1.32/rpm/
 enabled=1
 gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-8
+gpgkey=https://pkgs.k8s.io/core:/stable:/v1.33/rpm/repodata/repomd.xml.key
 EOF
+
 
 sudo dnf install -y kubelet kubeadm kubectl 
 
